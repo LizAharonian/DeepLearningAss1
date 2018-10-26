@@ -17,7 +17,7 @@ def softmax(x):
     #
     # For numeric stability, use the identify you proved in Ex 2 Q1.
     e = np.exp(x)
-    np.divide(e, np.sum(e))
+    return np.divide(e, np.sum(e))
 
 
 def classifier_output(x, params):
@@ -27,12 +27,13 @@ def classifier_output(x, params):
     """
     W, b = params
     # YOUR CODE HERE.
+    probs = softmax(np.dot(W,x)+b)
     return probs
 
 
 def predict(x, params):
     """
-    Returnss the prediction (highest scoring class id) of a
+    Returns the prediction (highest scoring class id) of a
     a log-linear classifier with given parameters on input x.
 
     params: a list of the form [(W, b)]
@@ -56,6 +57,21 @@ def loss_and_gradients(x, y, params):
     """
     W, b = params
     # YOU CODE HERE
+    #compute the loss
+    y_hat = classifier_output(x,params) #pred vec
+    loss = -np.log(y_hat[y])
+    #compute the gradients
+    number_of_classes = len(W) #get number of rows in w
+    gW=[]
+    gb=[]
+    for i in range(number_of_classes):
+        if i == y:
+            gW[i] = -x + np.dot(y_hat[i],x)
+            gb[i] = -1 + y_hat[i]
+        else:
+            gW[i] = np.dot(y_hat[i],x)
+            gb[i] = y_hat[i]
+
     return loss, [gW, gb]
 
 

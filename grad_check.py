@@ -26,7 +26,7 @@ def gradient_check(f, x):
         x_plus[ix] = x_plus[ix] + h
         x_minus = x
         x_minus[ix] = x_minus[ix] - h
-        numeric_gradient = (f(x_plus) - f(x_minus))/2*h
+        numeric_gradient = (f(x_plus)[0] - f(x_minus)[0])/2*h
         ### END YOUR CODE
 
         # Compare gradients
