@@ -1,9 +1,12 @@
 import loglinear as ll
+import utils as ut
 import random
 
 STUDENT = {'name': 'YOUR NAME',
            'ID': 'YOUR ID NUMBER'}
 
+EPOCHS = 10
+ETA = 0.1
 
 def feats_to_vec(features):
     # YOUR CODE HERE.
@@ -51,12 +54,11 @@ def train_classifier(train_data, dev_data, num_iterations, learning_rate, params
     return params
 
 
+
 if __name__ == '__main__':
     # YOUR CODE HERE
     # write code to load the train and dev sets, set up whatever you need,
     # and call train_classifier.
 
-
-    # ...
-    params = ll.create_classifier(in_dim, out_dim)
-    trained_params = train_classifier(train_data, dev_data, num_iterations, learning_rate, params)
+    params = ll.create_classifier(len(ut.F2I), len(ut.L2I))
+    trained_params = train_classifier(ut.TRAIN, ut.DEV, EPOCHS, ETA, params)
