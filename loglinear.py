@@ -62,16 +62,13 @@ def loss_and_gradients(x, y, params):
     loss = -np.log(y_hat[y])
     #compute the gradients
     number_of_classes = np.shape(W)[1] #get number of cols in w
-    gW=[]
-    gb=[]
-    for i in range(number_of_classes):
-        if i == y:
-            gW[i] = -x + np.dot(y_hat[i],x)
-            gb[i] = -1 + y_hat[i]
-        else:
-            gW[i] = np.dot(y_hat[i],x)
-            gb[i] = y_hat[i]
-
+    gb = y_hat.copy()
+    gb[y] -= 1
+    # liz = np.transpose(x)
+    # o = np.shape(x)
+    # la = np.shape(liz)
+    # le = np.shape(gb)
+    gW = np.outer(x,gb)
     return loss, [gW, gb]
 
 
