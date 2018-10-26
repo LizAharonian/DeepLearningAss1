@@ -1,5 +1,5 @@
 import numpy as np
-import numpy as np
+
 
 STUDENT = {'name': 'YOUR NAME',
            'ID': 'YOUR ID NUMBER'}

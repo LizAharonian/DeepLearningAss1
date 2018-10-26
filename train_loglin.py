@@ -1,6 +1,7 @@
 import loglinear as ll
 import utils as ut
 import random
+import numpy as np
 
 STUDENT = {'name': 'YOUR NAME',
            'ID': 'YOUR ID NUMBER'}
@@ -11,7 +12,15 @@ ETA = 0.1
 def feats_to_vec(features):
     # YOUR CODE HERE.
     # Should return a numpy vector of features.
-    return None
+    feats_vec = np.zeros(len(ut.F2I))
+
+    for bigram in features:
+        index = ut.F2I.get(bigram)
+        if index != None:
+            feats_vec[index] += 1
+    num_of_matches = np.sum(feats_vec)
+
+    return feats_vec
 
 
 def accuracy_on_dataset(dataset, params):
